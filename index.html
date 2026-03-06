@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>AeroPlace-Flow: Language-Conditioned Object Placement for Aerial Manipulators</title>
+
+    <meta name="description"
+        content="AeroPlace-Flow enables language-conditioned object placement for aerial manipulators using visual foresight and object flow inference.">
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+
+    <link rel="icon" href="./static/images/favicon.svg">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+
+    <script src="./static/js/bulma-carousel.min.js"></script>
+
+    <script src="./static/js/bulma-slider.min.js"></script>
+
+    <script src="./static/js/index.js"></script>
+
+</head>
+
+<body>
+
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+
+                        <h1 class="title is-1 publication-title">
+                            AeroPlace-Flow:  Language-Conditioned Object Placement for Aerial Manipulators via Visual Foresight and
+                            Object Flow
+                        </h1>
+
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+
+            <h2 class="title is-3">Abstract</h2>
+
+            <div class="content">
+
+                <p>
+
+                    Aerial manipulators enable robotic interaction in cluttered and elevated environments,
+                    but precise object placement remains challenging due to perception uncertainty
+                    and complex aerial dynamics.
+
+                    We present <b>AeroPlace-Flow</b>, a framework that performs <b>language-conditioned object
+                        placement</b> for aerial manipulators
+                    by leveraging generative visual foresight and metric object flow inference.
+
+                    Given a language instruction and scene observation, AeroPlace-Flow first generates
+                    a visual foresight of the desired placement configuration using off-the-shelf
+                    image editing models. We then recover the metric displacement of the manipulated
+                    object through object flow estimation, enabling the aerial manipulator to execute
+                    a smooth placement trajectory.
+
+                    We evaluate our method across diverse language-conditioned placement tasks and
+                    demonstrate reliable transfer from simulation to real-world aerial manipulation.
+
+                </p>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+
+            <div class="content has-text-centered">
+
+                <p>
+                    This website is licensed under a
+                    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+                        Creative Commons Attribution-ShareAlike 4.0 International License
+                    </a>.
+                </p>
+
+                <p>
+                    Website code borrowed from the
+                    <a href="https://nerfies.github.io">Nerfies project page</a>.
+                    Original template available at
+                    <a href="https://github.com/nerfies/nerfies.github.io">
+                        nerfies.github.io
+                    </a>.
+                </p>
+
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+
+</html>
