@@ -31,75 +31,343 @@
 
     <script src="./static/js/bulma-slider.min.js"></script>
 
-    <script src="./static/js/index.js"></script>
+    <!-- <script src="./static/js/index.js"></script> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/PLYLoader.js"></script>
 
 </head>
 
 <body>
 
     <section class="hero">
-        <div class="hero-body">
+        <div class="hero-body" style="padding-bottom: 1rem;">
             <div class="container is-max-desktop">
 
-                <div class="columns is-centered">
+                <div class="columns is-centered" style="margin-bottom: 0;">
                     <div class="column has-text-centered">
-
-                        <h1 class="title is-1 publication-title">
-                            AeroPlace-Flow:  Language-Conditioned Object Placement for Aerial Manipulators via Visual Foresight and
-                            Object Flow
+                        <h1 class="title is-1 publication-title" style="margin-bottom: 0;">
+                            AeroPlace-Flow: Language-Grounded Object Placement for Aerial Manipulators via Visual
+                            Foresight and Object Flow
                         </h1>
-
                         <br>
                     </div>
                 </div>
             </div>
-        </div>
     </section>
 
-    <section class="section">
+    <section class="hero teaser">
         <div class="container is-max-desktop">
+            <div class="hero-body">
 
-            <h2 class="title is-3">Abstract</h2>
+                <!-- <video id="teaser" autoplay muted loop playsinline height="100%">
+                <source src="./static/imgs/maindiag.jpg" type="image/jpg">
+            </video> -->
 
-            <div class="content">
+                <img src="./static/imgs/maindiag.jpg" alt="AeroPlace-Flow Overview" style="width:100%; height:auto;">
 
-                <p>
-
-                    Aerial manipulators enable robotic interaction in cluttered and elevated environments,
-                    but precise object placement remains challenging due to perception uncertainty
-                    and complex aerial dynamics.
-
-                    We present <b>AeroPlace-Flow</b>, a framework that performs <b>language-conditioned object
-                        placement</b> for aerial manipulators
-                    by leveraging generative visual foresight and metric object flow inference.
-
-                    Given a language instruction and scene observation, AeroPlace-Flow first generates
-                    a visual foresight of the desired placement configuration using off-the-shelf
-                    image editing models. We then recover the metric displacement of the manipulated
-                    object through object flow estimation, enabling the aerial manipulator to execute
-                    a smooth placement trajectory.
-
-                    We evaluate our method across diverse language-conditioned placement tasks and
-                    demonstrate reliable transfer from simulation to real-world aerial manipulation.
-
+                <p style="max-width:900px; margin:auto; margin-top:15px; text-align:justify;">
+                    <b>Overview of AeroPlace-Flow.</b>
+                    Given a natural language instruction and RGB-D observations of the object and placement scene,
+                    our method infers a collision-free object flow for aerial manipulation in three main steps.
+                    <b>(1) Visual Foresight:</b> a language-conditioned image editing model generates a goal image of
+                    the scene
+                    with the object placed according to the instruction.
+                    <b>(2) Object Flow Extraction:</b> the generated image is converted into a metrically consistent 3D
+                    scene,
+                    contact footprints are estimated, and the original object geometry is used to compute a
+                    collision-free
+                    object flow trajectory.
+                    <b>(3) Placement Execution:</b> the aerial manipulator tracks the inferred object flow to execute
+                    the placement.
+                    Bottom: hardware demonstrations of language-conditioned aerial placement tasks in diverse scenarios.
+                    <i>*Cable connected to drone is only for supplying power.</i>
                 </p>
-
             </div>
         </div>
     </section>
 
+    <section class="section" style="padding-top: 0rem;">
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column ">
+                    <h2 class="title is-3">Abstract</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Precise object placement remains underexplored in aerial manipulation, where most systems
+                            rely on predefined target coordinates and focus primarily on grasping and control.
+                            Specifying exact placement poses, however, is cumbersome in real-world settings, where users
+                            naturally communicate goals through language. In this work, we present
+                            <b>AeroPlace-Flow</b>, a training-free framework for language-grounded aerial object
+                            placement that unifies <b>visual foresight</b> with explicit 3D geometric reasoning and
+                            <b>object flow</b>.
+                            Given RGB-D observations of the object and the placement scene, along with a natural
+                            language instruction, AeroPlace-Flow first synthesizes a task-complete goal image using
+                            image editing models. The imagined configuration is then grounded into metric 3D space
+                            through depth alignment and object-centric reasoning, enabling the inference of a
+                            collision-aware object flow that transports the grasped object to a language- and
+                            contact-consistent placement configuration. The resulting motion is executed via standard
+                            trajectory tracking for an aerial manipulator.
+                            AeroPlace-Flow produces executable placement targets without requiring predefined poses or
+                            task-specific training. We validate our approach through extensive simulation and real-world
+                            experiments, demonstrating reliable language-conditioned placement across diverse aerial
+                            scenarios with an average success rate of <b>75% on hardware</b>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--/ Abstract. -->
+        </div>
+    </section>
+
+    <section class="section" id="results">
+        <div class="container is-max-desktop">
+
+            <div class="columns is-centered">
+                <div class="column">
+
+                    <h2 class="title is-3 has-text-centered">Test Results</h2>
+
+                    <!-- Task Buttons -->
+                    <div class="buttons is-centered" style="margin-bottom:20px;">
+                        <button class="button is-medium is-primary task-btn" data-task="task1">Task 1</button>
+                        <button class="button is-medium task-btn" data-task="task2">Task 2</button>
+                        <button class="button is-medium task-btn" data-task="task3">Task 3</button>
+                        <button class="button is-medium task-btn" data-task="task4">Task 4</button>
+                        <button class="button is-medium task-btn" data-task="task5">Task 5</button>
+                    </div>
+
+                    <!-- Task Instruction -->
+                    <p id="taskInstruction" class="has-text-centered" style="margin-bottom:25px; font-size:1.1rem;">
+                        Place the <span style="color:purple; font-weight:600;">purple object</span> on the
+                        <span style="color:blue; font-weight:600;">left side of the table</span>.
+                    </p>
+
+                    <!-- Tabs -->
+                    <div class="tabs is-centered is-boxed">
+                        <ul>
+                            <li class="is-active" data-tab="imggen"><a>Image Generation</a></li>
+                            <li data-tab="flow"><a>Object Flow</a></li>
+                            <li data-tab="place"><a>Object Placement</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="tab-pane" id="imggen" style="display:block;">
+                        <div class="columns is-vcentered">
+                            <!-- LEFT: Inputs -->
+                            <div class="column is-4">
+                                <div style="margin-bottom:20px;">
+                                    <p class="has-text-centered">
+                                        <b>Object Image: <i>I <sub>obj</sub></i></b>
+                                    </p>
+                                    <img id="objImage" src="./static/results/task1/obj.png"
+                                        style="width:100%; border-radius:6px;">
+                                </div>
+                                <div>
+                                    <p class="has-text-centered">
+                                        <b>Scene Image: <i>I <sub>scene</sub></i></b>
+                                    </p>
+                                    <img id="rgbImage" src="./static/results/task1/rgb.png"
+                                        style="width:100%; border-radius:6px;">
+                                </div>
+                            </div>
+                            <!-- RIGHT: Output -->
+                            <div class="column is-8 has-text-centered">
+                                <p style="margin-bottom:10px;">
+                                    <b>Visual Foresight: <i>I <sub>gen</sub></i></b>
+                                </p>
+                                <img id="genImage" src="./static/results/task1/gen.png"
+                                    style="width:100%; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.15);">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="flow" style="display:none;">
+
+                        <p class="has-text-centered" style="margin-bottom:10px;">
+                            <b>Object Flow Point Cloud</b>
+                        </p>
+
+                        <div id="pcdViewer" style="width:100%; height:500px; border-radius:8px; border:1px solid #ddd;">
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane" id="place" style="display:none;">
+                        <p class="has-text-centered">Object placement results will appear here.</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        const tasks = {
+            task1: {
+                obj: "./static/results/task1/obj.png",
+                rgb: "./static/results/task1/rgb.png",
+                gen: "./static/results/task1/gen.png",
+                text: 'Place the <span style="color:purple;font-weight:600;">purple object</span> on the <span style="color:blue;font-weight:600;">left side of the table</span>.',
+                flow: "./static/results/task1/flow.ply"
+            },
+            task2: {
+                obj: "./static/results/task2/obj.png",
+                rgb: "./static/results/task2/rgb.png",
+                gen: "./static/results/task2/gen.png",
+                text: 'Place the <span style="color:red;font-weight:600;">red cup</span> on the <span style="color:green;font-weight:600;">top shelf</span>.',
+                flow: "./static/results/task2/flow.ply"
+            },
+            task3: {
+                obj: "./static/results/task3/obj.png",
+                rgb: "./static/results/task3/rgb.png",
+                gen: "./static/results/task3/gen.png",
+                text: 'Place the <span style="color:orange;font-weight:600;">orange box</span> beside the <span style="color:blue;font-weight:600;">blue container</span>.',
+                flow: "./static/results/task3/flow.ply"
+            },
+            task4: {
+                obj: "./static/results/task4/obj.png",
+                rgb: "./static/results/task4/rgb.png",
+                gen: "./static/results/task4/gen.png",
+                text: 'Place the <span style="color:purple;font-weight:600;">purple bottle</span> near the <span style="color:green;font-weight:600;">plant</span>.',
+                flow: "./static/results/task4/flow.ply"
+            },
+            task5: {
+                obj: "./static/results/task5/obj.png",
+                rgb: "./static/results/task5/rgb.png",
+                gen: "./static/results/task5/gen.png",
+                text: 'Place the <span style="color:red;font-weight:600;">red object</span> on the <span style="color:blue;font-weight:600;">right side of the table</span>.',
+                flow: "./static/results/task5/flow.ply"
+            }
+        };
+
+        document.querySelectorAll(".task-btn").forEach(btn => {
+            btn.addEventListener("click", function () {
+
+                document.querySelectorAll(".task-btn").forEach(b => b.classList.remove("is-primary"));
+                this.classList.add("is-primary");
+
+                const t = tasks[this.dataset.task];
+
+                document.getElementById("objImage").src = t.obj;
+                document.getElementById("rgbImage").src = t.rgb;
+                document.getElementById("genImage").src = t.gen;
+
+                document.getElementById("taskInstruction").innerHTML = t.text;
+
+                loadPointCloud(t.flow);
+            });
+        });
+
+        document.querySelectorAll(".tabs li").forEach(tab => {
+            tab.addEventListener("click", () => {
+
+                document.querySelectorAll(".tabs li").forEach(t => t.classList.remove("is-active"));
+                tab.classList.add("is-active");
+
+                const tabName = tab.dataset.tab;
+
+                document.querySelectorAll(".tab-pane").forEach(p => p.style.display = "none");
+                document.getElementById(tabName).style.display = "block";
+
+                // initialize viewer only when flow tab is opened
+                if (tabName === "flow") {
+                    if (!renderer) {
+                        initViewer();
+                        loadPointCloud(tasks["task1"].flow);
+                    }
+                }
+
+            });
+        });
+
+        let scene, camera, renderer, controls, pointCloud;
+
+        function initViewer() {
+
+            const container = document.getElementById("pcdViewer");
+
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0xffffff);
+
+            camera = new THREE.PerspectiveCamera(
+                60,
+                container.clientWidth / container.clientHeight,
+                0.1,
+                1000
+            );
+
+            camera.position.set(0, 0, 2);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+
+            container.innerHTML = "";
+            container.appendChild(renderer.domElement);
+
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+            const light = new THREE.DirectionalLight(0xffffff, 1);
+            light.position.set(1, 1, 1);
+            scene.add(light);
+
+            animate();
+        }
+
+        function loadPointCloud(file) {
+
+            const loader = new THREE.PLYLoader();
+            loader.load(file, function (geometry) {
+
+                if (geometry.attributes.color) {
+
+                    const colors = geometry.attributes.color.array;
+
+                    // detect if colors are 0–255 or already 0–1
+                    let maxColor = 0;
+                    for (let i = 0; i < colors.length; i++) {
+                        if (colors[i] > maxColor) maxColor = colors[i];
+                    }
+
+                    // normalize only if needed
+                    if (maxColor > 1.0) {
+                        for (let i = 0; i < colors.length; i++) {
+                            colors[i] /= 255.0;
+                        }
+                    }
+
+                }
+
+                const material = new THREE.PointsMaterial({
+                    size: 0.02,
+                    vertexColors: true
+                });
+
+                if (pointCloud) scene.remove(pointCloud);
+
+                pointCloud = new THREE.Points(geometry, material);
+                scene.add(pointCloud);
+
+            });
+
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+    </script>
+
+
+
     <footer class="footer">
         <div class="container">
-
             <div class="content has-text-centered">
-
-                <p>
-                    This website is licensed under a
-                    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
-                        Creative Commons Attribution-ShareAlike 4.0 International License
-                    </a>.
-                </p>
-
                 <p>
                     Website code borrowed from the
                     <a href="https://nerfies.github.io">Nerfies project page</a>.
@@ -108,9 +376,7 @@
                         nerfies.github.io
                     </a>.
                 </p>
-
             </div>
-
         </div>
     </footer>
 
