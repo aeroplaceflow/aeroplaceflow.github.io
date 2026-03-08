@@ -57,13 +57,44 @@
             </div>
     </section>
 
-    <section class="hero teaser">
+    <section class="section" style="padding-top:0.5rem; padding-bottom:0.5rem;">
         <div class="container is-max-desktop">
-            <div class="hero-body">
 
-                <!-- <video id="teaser" autoplay muted loop playsinline height="100%">
-                <source src="./static/imgs/maindiag.jpg" type="image/jpg">
-            </video> -->
+            <div class="columns is-centered">
+                <div class="column has-text-centered">
+
+                    <div class="buttons is-centered are-medium">
+
+                        <a href="#abstract" class="button is-dark">
+                            <span class="icon"><i class="fas fa-file-alt"></i></span>
+                            <span>Abstract</span>
+                        </a>
+
+                        <a href="#video" class="button is-dark">
+                            <span class="icon"><i class="fas fa-video"></i></span>
+                            <span>Video</span>
+                        </a>
+
+                        <a href="#results" class="button is-dark">
+                            <span class="icon"><i class="fas fa-chart-line"></i></span>
+                            <span>Results</span>
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="hero teaser" style="padding-top: 1rem; margin-top: 0%;">
+        <div class="container is-max-desktop" style="padding-top: 1rem; margin-top: 0%;">
+            <div class="hero-body" style="padding-top: 1rem; margin-top: 0%;">
+
+                <!-- <video style="border: 3px solid #000; border-radius: 8px;" id="teaser" controls autoplay loop playsinline height="100%">
+                    <source src="./static/imgs/video.mp4" type="video/mp4">
+                </video> -->
 
                 <img src="./static/imgs/maindiag.jpg" alt="AeroPlace-Flow Overview" style="width:100%; height:auto;">
 
@@ -88,7 +119,7 @@
         </div>
     </section>
 
-    <section class="section" style="padding-top: 0rem;">
+    <section class="section" id="abstract" style="padding-top: 0rem;">
         <div class="container is-max-desktop">
             <!-- Abstract. -->
             <div class="columns is-centered has-text-centered">
@@ -116,6 +147,22 @@
                             scenarios with an average success rate of <b>75% on hardware</b>.
                         </p>
                     </div>
+                </div>
+            </div>
+            <!--/ Abstract. -->
+        </div>
+    </section>
+
+     <section class="section" id="video" style="padding-top: 0rem;">
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column ">
+                    <h2 class="title is-3">Video</h2>
+                    <video style="border: 3px solid #000; border-radius: 8px;" id="teaser" controls autoplay loop
+                        playsinline height="100%">
+                        <source src="./static/imgs/video.mp4" type="video/mp4">
+                    </video>
                 </div>
             </div>
             <!--/ Abstract. -->
@@ -193,6 +240,10 @@
                         <div id="pcdViewer" style="width:100%; height:500px; border-radius:8px; border:1px solid #ddd;">
                         </div>
 
+                        <p style="text-align:center; margin-top:8px; font-size:0.9rem; color:#666;">
+                            <b>Controls:</b> Left click = rotate • Right click = pan • Scroll = zoom
+                        </p>
+
                     </div>
 
                     <div class="tab-pane" id="place" style="display:none;">
@@ -211,36 +262,36 @@
                 obj: "./static/results/task1/obj.png",
                 rgb: "./static/results/task1/rgb.png",
                 gen: "./static/results/task1/gen.png",
-                text: 'Place the <span style="color:purple;font-weight:600;">purple object</span> on the <span style="color:blue;font-weight:600;">left side of the table</span>.',
-                flow: "./static/results/task1/flow.ply"
+                text: 'Place the <span style="color:purple;font-weight:600;">WD40 bottle</span> in the <span style="color:blue;font-weight:600;">blue tray</span> on the ground.',
+                flow: "./static/results/task1/flow_small.ply"
             },
             task2: {
                 obj: "./static/results/task2/obj.png",
                 rgb: "./static/results/task2/rgb.png",
                 gen: "./static/results/task2/gen.png",
-                text: 'Place the <span style="color:red;font-weight:600;">red cup</span> on the <span style="color:green;font-weight:600;">top shelf</span>.',
-                flow: "./static/results/task2/flow.ply"
+                text: 'Place the <span style="color:red;font-weight:600;">deodorant</span> on the <span style="color:green;font-weight:600;">purple cube</span> on the table.',
+                flow: "./static/results/task2/flow_small.ply"
             },
             task3: {
                 obj: "./static/results/task3/obj.png",
                 rgb: "./static/results/task3/rgb.png",
                 gen: "./static/results/task3/gen.png",
-                text: 'Place the <span style="color:orange;font-weight:600;">orange box</span> beside the <span style="color:blue;font-weight:600;">blue container</span>.',
-                flow: "./static/results/task3/flow.ply"
+                text: 'Place the <span style="color:orange;font-weight:600;">ball</span> in the <span style="color:blue;font-weight:600;">basket of the robot</span> below the table.',
+                flow: "./static/results/task3/flow_small.ply"
             },
             task4: {
                 obj: "./static/results/task4/obj.png",
                 rgb: "./static/results/task4/rgb.png",
                 gen: "./static/results/task4/gen.png",
-                text: 'Place the <span style="color:purple;font-weight:600;">purple bottle</span> near the <span style="color:green;font-weight:600;">plant</span>.',
-                flow: "./static/results/task4/flow.ply"
+                text: 'Place the <span style="color:purple;font-weight:600;">sanitizer bottle</span> on the <span style="color:green;font-weight:600;">leftmost cross mark</span> on the table.',
+                flow: "./static/results/task4/flow_small.ply"
             },
             task5: {
                 obj: "./static/results/task5/obj.png",
                 rgb: "./static/results/task5/rgb.png",
                 gen: "./static/results/task5/gen.png",
-                text: 'Place the <span style="color:red;font-weight:600;">red object</span> on the <span style="color:blue;font-weight:600;">right side of the table</span>.',
-                flow: "./static/results/task5/flow.ply"
+                text: 'Place the <span style="color:red;font-weight:600;">digital meter</span> on the <span style="color:blue;font-weight:600;">second rack of the shelf</span>.',
+                flow: "./static/results/task5/flow_small.ply"
             }
         };
 
@@ -349,6 +400,8 @@
                 if (pointCloud) scene.remove(pointCloud);
 
                 pointCloud = new THREE.Points(geometry, material);
+                pointCloud.rotation.x = -Math.PI / 2;
+
                 scene.add(pointCloud);
 
             });
@@ -362,8 +415,6 @@
         }
 
     </script>
-
-
 
     <footer class="footer">
         <div class="container">
