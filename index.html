@@ -70,6 +70,11 @@
                             <span>Abstract</span>
                         </a>
 
+                        <a href="#method" class="button is-dark">
+                            <span class="icon"><i class="fas fa-cogs"></i></span>
+                            <span>How It Works</span>
+                        </a>
+
                         <a href="#video" class="button is-dark">
                             <span class="icon"><i class="fas fa-video"></i></span>
                             <span>Video</span>
@@ -153,9 +158,85 @@
         </div>
     </section>
 
-     <section class="section" id="video" style="padding-top: 0rem;">
+    <section class="section" id="method" style="padding-top:0rem;">
         <div class="container is-max-desktop">
-            <!-- Abstract. -->
+
+            <div class="columns is-centered">
+                <div class="column">
+
+                    <h2 class="title is-3 has-text-centered">How AeroPlace-Flow Works</h2>
+
+                    <div class="content" style="font-size:1.05rem;">
+
+                        <ol style="max-width:850px; margin:auto;">
+
+                            <li style="margin-bottom:18px;">
+                                <b>Visual Foresight (Goal Image Generation)</b><br>
+                                Given a natural language instruction and RGB-D observations of the object and placement
+                                scene,
+                                a language-conditioned image editing model generates a <b>goal image</b> showing the
+                                object
+                                placed according to the instruction.
+                                This image acts as a <b>semantic hypothesis</b> of the desired final configuration.
+                            </li>
+
+
+                            <li style="margin-bottom:18px;">
+                                <b>Object Flow Inference</b><br>
+                                The generated goal image is grounded into metric 3D space to infer a feasible
+                                motion trajectory for the object.
+
+                                <ul style="margin-top:8px;">
+
+                                    <li>
+                                        <b>Metric 3D Scene Reconstruction</b>
+                                        Recover a metrically consistent 3D scene from the generated image by aligning
+                                        estimated depth with the observed scene depth.
+                                    </li>
+
+                                    <li>
+                                        <b>Contact Footprint Estimation</b>
+                                        Identify the support region where the object should be placed by estimating
+                                        the contact footprint between the generated object and the environment.
+                                    </li>
+
+                                    <li>
+                                        <b>Object Geometry Alignment</b>
+                                        Replace the generated object's geometry with the real object geometry to
+                                        ensure physically consistent placement.
+                                    </li>
+
+                                    <li>
+                                        <b>Collision-Aware Object Flow Optimization</b>
+                                        Compute a trajectory that moves the object from the current gripper pose to the
+                                        target placement configuration while enforcing collision avoidance and
+                                        motion smoothness.
+                                    </li>
+
+                                </ul>
+                            </li>
+
+
+                            <li>
+                                <b>Placement Execution</b><br>
+                                The inferred object flow is executed by the aerial manipulator using trajectory
+                                tracking,
+                                transporting the grasped object to the predicted placement configuration.
+                            </li>
+
+                        </ol>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section" id="video" style="padding-top: 0rem;">
+        <div class="container is-max-desktop">
+            <!-- video. -->
             <div class="columns is-centered has-text-centered">
                 <div class="column ">
                     <h2 class="title is-3">Video</h2>
@@ -165,7 +246,7 @@
                     </video>
                 </div>
             </div>
-            <!--/ Abstract. -->
+            <!--/ video. -->
         </div>
     </section>
 
@@ -247,7 +328,18 @@
                     </div>
 
                     <div class="tab-pane" id="place" style="display:none;">
-                        <p class="has-text-centered">Object placement results will appear here.</p>
+
+                        <p class="has-text-centered" style="margin-bottom:10px;">
+                            <b>Object Placement Execution</b>
+                        </p>
+
+                        <div style="position:relative; display:flex; justify-content:center;">
+                            <div id="gifLoader" class="loader"></div>
+
+                            <img id="placeGif" src="./static/results/task1/place.gif"
+                                style="max-width:80%; border-radius:8px; display:none;">
+                        </div>
+
                     </div>
 
                 </div>
@@ -262,6 +354,7 @@
                 obj: "./static/results/task1/obj.png",
                 rgb: "./static/results/task1/rgb.png",
                 gen: "./static/results/task1/gen.png",
+                place: "./static/results/task1/res.gif",
                 text: 'Place the <span style="color:purple;font-weight:600;">WD40 bottle</span> in the <span style="color:blue;font-weight:600;">blue tray</span> on the ground.',
                 flow: "./static/results/task1/flow_small.ply"
             },
@@ -269,6 +362,7 @@
                 obj: "./static/results/task2/obj.png",
                 rgb: "./static/results/task2/rgb.png",
                 gen: "./static/results/task2/gen.png",
+                place: "./static/results/task2/res.gif",
                 text: 'Place the <span style="color:red;font-weight:600;">deodorant</span> on the <span style="color:green;font-weight:600;">purple cube</span> on the table.',
                 flow: "./static/results/task2/flow_small.ply"
             },
@@ -276,6 +370,7 @@
                 obj: "./static/results/task3/obj.png",
                 rgb: "./static/results/task3/rgb.png",
                 gen: "./static/results/task3/gen.png",
+                place: "./static/results/task3/res.gif",
                 text: 'Place the <span style="color:orange;font-weight:600;">ball</span> in the <span style="color:blue;font-weight:600;">basket of the robot</span> below the table.',
                 flow: "./static/results/task3/flow_small.ply"
             },
@@ -283,6 +378,7 @@
                 obj: "./static/results/task4/obj.png",
                 rgb: "./static/results/task4/rgb.png",
                 gen: "./static/results/task4/gen.png",
+                place: "./static/results/task4/res.gif",
                 text: 'Place the <span style="color:purple;font-weight:600;">sanitizer bottle</span> on the <span style="color:green;font-weight:600;">leftmost cross mark</span> on the table.',
                 flow: "./static/results/task4/flow_small.ply"
             },
@@ -290,6 +386,7 @@
                 obj: "./static/results/task5/obj.png",
                 rgb: "./static/results/task5/rgb.png",
                 gen: "./static/results/task5/gen.png",
+                place: "./static/results/task5/res.gif",
                 text: 'Place the <span style="color:red;font-weight:600;">digital meter</span> on the <span style="color:blue;font-weight:600;">second rack of the shelf</span>.',
                 flow: "./static/results/task5/flow_small.ply"
             }
@@ -310,6 +407,26 @@
                 document.getElementById("taskInstruction").innerHTML = t.text;
 
                 loadPointCloud(t.flow);
+
+                // RESET TAB TO IMAGE GENERATION
+                document.querySelectorAll(".tabs li").forEach(t => t.classList.remove("is-active"));
+                document.querySelector('.tabs li[data-tab="imggen"]').classList.add("is-active");
+
+                document.querySelectorAll(".tab-pane").forEach(p => p.style.display = "none");
+                document.getElementById("imggen").style.display = "block";
+
+                const gif = document.getElementById("placeGif");
+                const gifLoader = document.getElementById("gifLoader");
+
+                gif.style.display = "none";
+                gifLoader.style.display = "block";
+
+                gif.src = t.place;
+
+                gif.onload = () => {
+                    gifLoader.style.display = "none";
+                    gif.style.display = "block";
+                };
             });
         });
 
@@ -330,6 +447,24 @@
                         initViewer();
                         loadPointCloud(tasks["task1"].flow);
                     }
+                }
+                if (tabName === "place") {
+
+                    const currentTask = document.querySelector(".task-btn.is-primary")?.dataset.task || "task1";
+                    const t = tasks[currentTask];
+
+                    const gif = document.getElementById("placeGif");
+                    const gifLoader = document.getElementById("gifLoader");
+
+                    gif.style.display = "none";
+                    gifLoader.style.display = "block";
+
+                    gif.src = t.place;
+
+                    gif.onload = () => {
+                        gifLoader.style.display = "none";
+                        gif.style.display = "block";
+                    };
                 }
 
             });
